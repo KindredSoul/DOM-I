@@ -42,7 +42,8 @@ let logo = document.getElementById("logo-img");
 logo.setAttribute('src', siteContent["nav"]["img-src"])
 
 // Nav Section
-let navItems = document.querySelectorAll('a').forEach((item, i)=>item.textContent = siteContent['nav'][`nav-item-${i}`])
+let navItems = document.querySelectorAll('nav a')
+navItems.forEach((item, i)=>item.textContent = siteContent['nav'][`nav-item-${i+1}`])
 
 // Call To Action Section
 let ctaText = document.querySelector('.cta-text')
@@ -85,3 +86,21 @@ contacts[3].textContent = siteContent['contact']['email']
 
 // Footer Section
 let footer = document.querySelector('footer p').textContent = siteContent['footer']['copyright']
+
+// New Content Section
+navItems.forEach(item=> item.style.color = "limegreen")
+let nav = document.querySelector('nav')
+const addNavItems = (item, placement)=>{
+  let newNav = document.createElement('a')
+  newNav.setAttribute('href', '#')
+  newNav.style.color = "limegreen"
+  newNav.textContent = `${item}`
+  if(placement === 'prepend'){
+    return nav.prepend(newNav)
+  }else if(placement === 'appendChild'){
+    return nav.appendChild(newNav)
+  }
+}
+
+addNavItems("News", 'prepend')
+addNavItems("More News", 'appendChild')
